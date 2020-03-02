@@ -1,0 +1,76 @@
+$off-white:#f7f7f7;
+$main-font:"Arial Black", Gadget, sans-serif;
+.App{
+    background-image: url('https://images.unsplash.com/photo-1525973132219-a04334a76080?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1277&q=80');
+    width: 100vw;
+    background-size: 100%;
+    background-repeat: cover;
+    height: 100vh;
+    display: flex;
+
+    flex-direction: column;
+}
+.header{
+    font-family: "Arial Black", Gadget, sans-serif;
+    font-size: 50px;
+    letter-spacing: -1.8px;
+    word-spacing: 2px;
+    color:$off-white;
+    font-weight: 700;
+    text-decoration: none;
+    font-style: italic;
+    font-variant: normal;
+    text-transform: none;
+    padding: 10px;
+
+}
+.background{
+    width: 80vw;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+.card{
+    width: 300px;
+    height: 500px;
+    border-radius: 10px;
+    background-color: $off-white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 30px;
+    margin-left: 40px;
+    // margin-top: 50px;
+    margin-bottom: -100px;
+    font-family: $main-font;
+    color: grey;
+}
+.login{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+img{
+    width: 40px;
+}
+button{
+    border: none;
+    height: 30px;
+    width: 300px*.8;
+    color: $off-white;
+    background-color: rgb(117, 78, 209);
+    font-family: $main-font;
+    box-shadow: 2px 2px 3px rgb(180, 180, 180)
+}
+input{
+    border: none;
+    border-bottom: 1px solid rgb(196, 196, 196);
+    background-color: $off-white;
+    border-radius: 3px;
+    height: 30px;
+    color: rgb(201, 201, 201);
+    font-family: $main-font;    
+}

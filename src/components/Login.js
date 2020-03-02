@@ -25,7 +25,7 @@ class Login extends Component {
             return <Redirect to="/Profile" />
         }
         return (
-            <div>
+            <div className='login'>
                 <input
                     name='email'
                     onChange={this.handleChange}

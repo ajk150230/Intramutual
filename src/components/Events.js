@@ -1,26 +1,41 @@
 import React, { Component } from 'react';
 import CalendarEvent from './CalendarEvent'
+// import ReactMapGl from "react-map-gl"
+import { connect } from "react-redux";
+import { postEvent } from "../redux/eventReducer"
+import { Redirect, Link } from "react-router-dom";
+
 class Events extends Component {
     constructor() {
         super()
         this.state = {
-            eventName: '',
+            event_name: '',
             address: '',
             sport: '',
-            date: '',
-            startTime: 0,
-            endTime: 0,
+            dateofevent: '',
+            starttime: 0,
+            endtime: 0,
+            shouldRedirect: false
         }
     }
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
     }
+    handleClick = () =>{
+        const {event_name, address, sport, dateofevent, starttime, endtime} = this.state
+        this.props.postEvent(event_name, address, sport, dateofevent, starttime, endtime)
+        this.setState({shouldRedirect: true})
+        console.log(typeof dateofevent)
+    }
     render() {
+        if(this.state.shouldRedirect){
+            return <Redirect to='/profile'/>
+        }
         return (
             <div> 
                 Events
                 <input
-                    name='eventName'
+                    name='event_name'
                     placeholder='Event Name'
                     onChange={this.handleChange}
                 />
@@ -35,24 +50,29 @@ class Events extends Component {
                     onChange={this.handleChange}
                 />
                 <input
-                    name='date'
+                    name='dateofevent'
                     type='date'
                     onChange={this.handleChange}
                 />
                 <input
-                    name='startTime'
+                    name='starttime'
                     placeholder='Start Time'
                     type='time'
                     onChange={this.handleChange} />
                 <input
-                    name='endTime'
+                    name='endtime'
                     placeholder='End Time'
                     type='time'
                     onChange={this.handleChange} />
+                {/* <ReactMapGl>
 
+                </ReactMapGl> */}
+                <button onClick={this.handleClick}>Post Event</button>
             </div>
         );
     }
 }
 
-export default Events;
+const mapStateToProps = (reduxState) => ({ event: reduxState.event })
+
+export default connect(mapStateToProps, { postEvent })(Events); 

@@ -42,7 +42,7 @@ module.exports = {
         if(loggedUser.length === 0){
             return res.status(401).send('This email is not registered or found')
         }
-        const cleared = bcrypt.compare(password, user.password)
+        const cleared = await bcrypt.compare(password, user.password)
         if(!cleared){
             return res.status(403).json('Incorrect password')
         }

@@ -7,12 +7,20 @@ const initialState = {
     company: "",
     sport: "",
     city: "",
+    shouldRedirect: false
 }
 
 const REGISTER_PROFILE = "REGISTER_PROFILE";
 const LOGIN_USER = "LOGIN_USER"
 const GET_SESSION = "GET_SESSION"
 const UPDATE_STATE = "UPDATE_STATE"
+const RESET_STATE = "RESET_STATE"
+
+export function resetState() {
+    return{
+        type:RESET_STATE
+    }
+}
 
 export function registerProfile(user){
     // console.log(email, firstname, lastname, company, sport, city)
@@ -34,9 +42,10 @@ export function getSession(){
         payload: axios.get('/auth/user')
     }
 }
-export function updateState(){
+export function updateState(e){
     return{
-        type: UPDATE_STATE
+        type: UPDATE_STATE,
+        payload: e
     }
 }
 
@@ -44,7 +53,6 @@ export function updateState(){
 export default function reducer(state=initialState, action){
     switch (action.type){
         case REGISTER_PROFILE + '_FULFILLED':
-        
         return{
             ...state,
             users_id: action.payload.data.users_id,
@@ -54,6 +62,7 @@ export default function reducer(state=initialState, action){
             company: action.payload.data.company,
             sport: action.payload.data.sport,
             city: action.payload.data.city,
+            shouldRedirect: false            
         }
         case LOGIN_USER + '_FULFILLED':
         // const {email, password, firstname, lastname, company, sport, city, profile} = action.payload
@@ -67,6 +76,7 @@ export default function reducer(state=initialState, action){
             company: action.payload.data.company,
             sport: action.payload.data.sport,
             city: action.payload.data.city,
+            shouldRedirect: false
         }
         case GET_SESSION + '_FULFILLED':
         return{
@@ -79,15 +89,21 @@ export default function reducer(state=initialState, action){
             sport: action.payload.data.sport,
             city: action.payload.data.city,
         }
-        case UPDATE_STATE + '_FULFILLED':
+        case UPDATE_STATE:
         return{
             ...state,
-            email: '',
-            firstname: '',
-            lastname: '',
-            company: '',
-            sport: '',
-            city: ''       
+            ...action.payload      
+         }
+         case RESET_STATE:
+         return{
+             ...state,
+             users_id: '',
+             email: "",
+             firstname: "",
+             lastname: "",
+             company: "",
+             sport: "",
+             city: ""
          }
         default:
             return state;

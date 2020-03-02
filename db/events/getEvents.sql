@@ -1,0 +1,2 @@
+select event_id, event_name, TO_CHAR(dateofevent :: DATE, 'Mon dd, yyyy') as dateofevent, TO_CHAR(starttime :: TIME, 'HH:MI') as starttime, TO_CHAR(endtime :: TIME, 'HH:MI') as endtime
+from events where users_id = $1

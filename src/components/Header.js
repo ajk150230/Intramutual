@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 
 
 class Header extends Component {
-    constructor(){
+    constructor() {
         super()
     }
 
     render() {
         return (
             <div>
-                INTRAMUTUAL
+                <div className='header'>
+                    IntraMutual
+                </div>
             </div>
         );
     }
