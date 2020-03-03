@@ -1,0 +1,1 @@
+select * from events where not users= $1

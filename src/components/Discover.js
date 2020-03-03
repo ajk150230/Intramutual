@@ -5,7 +5,7 @@ class Discover extends Component {
     render() {
         return (
             <div>
-                Discover
+                
             </div>
         );
     }

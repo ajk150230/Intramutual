@@ -15,9 +15,10 @@ module.exports={
     },
     editEvent: function (req, res){
         const db = req.app.get('db')
-        const {event_name, address, date_OfEvent, startTime, endTime} = req.body
+        const {event_name, address, sport, dateofevent, starttime, endtime} = req.body
         const {event_id}=req.params
-        db.events.edit_Events([id, event_name, address, date_OfEvent, startTime, endTime])
+        console.log(event_id)
+        db.events.editEvents([event_id, event_name, address, sport, dateofevent, starttime, endtime])
             .then(()=>res.sendStatus(200))
             .catch(error =>{
                 console.log(error)
@@ -27,7 +28,8 @@ module.exports={
     deleteEvent: function (req, res){
         const db = req.app.get('db')
         const event_id = req.params.id
-        db.events.deleteEvents(event_id)
+        console.log(event_id)
+        db.events.deleteEvent(event_id)
             .then(response =>{
                 res.sendStatus(200)
             })

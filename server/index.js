@@ -29,7 +29,7 @@ app.get("/auth/user", getSession)
 app.get('/auth/logout', logout)
 
 app.post("/api/event", postEvent)
-app.put("/api/event/:id", editEvent)
+app.put("/api/event/:event_id", editEvent)
 app.delete(`/api/event/:id`, deleteEvent)
 app.get("/api/event", getEvents)
 

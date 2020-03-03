@@ -1,40 +1,58 @@
 import React, { Component } from 'react';
-import {connect} from "react-redux"
-import {getUserEvents, deleteEvent} from "../redux/eventReducer"
+import { connect } from "react-redux"
+import { getUserEvents, deleteEvent } from "../redux/eventReducer"
+import EditModal from './EditModal'
 
 class DisplayProfileEvents extends Component {
-    constructor(){
+    constructor() {
         super()
-        this.state={
-
+        this.state = {
+            open: false,
+            event_id: 9999
         }
     }
-    componentDidMount(){
+    componentDidMount() {
         this.props.getUserEvents()
     }
-    handleClick = (event_id) =>{
+    handleClick = (event_id) => {
         this.props.deleteEvent(event_id)
+        this.props.getUserEvents()
+        console.log(event_id)
+    }
+    togglePop = (id) => {
+        console.log('working')
+        this.setState({
+            open: !this.state.open,
+            event_id: id
+        })
     }
     render() {
         const mapped = this.props.event.profileEvents.map(element => {
-            return(
-                <div>
-                    {element.event_name}
-                    {element.dateofevent}
-                    {element.starttime}
-                    {element.endtime}
-                    <button onClick={this.handleClick(element.event_id)}>Delete</button>
+            return (
+                <div id='cardV2'>
+                    <h4>Event: {element.event_name}</h4>
+                    <h4>Date: {element.dateofevent}</h4>
+                    <h4>At: {element.starttime}</h4>
+                    <h4>Ends: {element.endtime}</h4>
+                    <button onClick={() => this.handleClick(element.event_id)}>Delete</button>
+                    <div>
+                        <div >
+                            <button onClick={() => this.togglePop(element.event_id)}>Edit</button>
+                        </div>
+                    </div>
                 </div>
             )
         })
         return (
-            <div>
+            <div className='profilecard'>
+                {console.log(this.state.open)}
+                {this.state.open ? <EditModal toggle={this.togglePop} event_id={this.state.event_id}/> : ''}
                 {mapped}
             </div>
         );
     }
 }
 
-const mapStateToProps = (reduxState) => ({event: reduxState.event})
+const mapStateToProps = (reduxState) => ({ event: reduxState.event })
 
-export default connect(mapStateToProps, {getUserEvents, deleteEvent})(DisplayProfileEvents);
+export default connect(mapStateToProps, { getUserEvents, deleteEvent })(DisplayProfileEvents);

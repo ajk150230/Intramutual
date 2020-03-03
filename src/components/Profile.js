@@ -27,8 +27,6 @@ class Profile extends Component {
             })
 
             .catch(err => { console.log(err) })
-            const usernameProp = this.props.user.username
-            this.setState({username: usernameProp})
     }
     render() {
         console.log(this.props.user)
@@ -36,15 +34,17 @@ class Profile extends Component {
             return <Redirect to='/' />
         }
         return (
-            <div>
+            <div className='profilecard'>
+                <div className='usercard'>
                 Profile
-                <button onClick={this.handleClick}>Logout</button>
                 <h1>{this.props.user.firstname} {this.props.user.lastname}</h1>
                 <h1>Works at: {this.props.user.company}</h1>
                 <h1>Favorite Sport: {this.props.user.sport}</h1>
                 <h1>City: {this.props.user.city}</h1>
-                <div>
+                <button id='button2' onClick={this.handleClick}>Logout</button>
+                </div>
                     <Events/>
+                <div>
                     <DisplayProfileEvents/>
                 </div>
             </div>
