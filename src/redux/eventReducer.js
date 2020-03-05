@@ -6,11 +6,13 @@ const initialState = {
     sport: "",
     starttime: "",
     endtime: "",
-    profileEvents: []
+    profileEvents: [],
+    discoverEvents: []
 }
 
 const POSTEVENT = "POSTEVENT"
 const GETUSEREVENTS = "GETUSEREVENTS"
+const GETALLEVENTS = "GETALLEVENTS"
 const DELETEEVENT = "DELETEEVENT"
 const EDITEVENT = "EDITEVENT"
 
@@ -29,7 +31,15 @@ export function getUserEvents() {
     }
 }
 
+export function getAllEvents(){
+    return{
+        type: GETALLEVENTS,
+        payload: axios.get("/api/discover")
+    }
+}
+
 export function deleteEvent(event_id) {
+    console.log(event_id)
     return {
         type: DELETEEVENT,
         payload: axios.delete(`/api/event/${event_id}`)
@@ -71,6 +81,11 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 profileEvents: action.payload.data
+            }
+        case GETALLEVENTS + '_FULFILLED':
+            return {
+                ...state,
+                discoverEvents: action.payload.data
             }
         case DELETEEVENT + '_FULFILLED':
             return {

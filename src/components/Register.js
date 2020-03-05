@@ -15,7 +15,6 @@ class Register extends Component {
             company: "",
             sport: "",
             city: "",
-            shouldRedirect: false,
         }
     }
     handleChange = e => {
@@ -27,13 +26,13 @@ class Register extends Component {
         e.preventDefault()
         const {email, password, firstname, lastname, company, sport, city} = this.state
         const user = {email, password, firstname, lastname, company, sport, city}
-        this.setState({shouldRedirect: true})
         this.props.registerProfile(user)
     }
     render() {
-        if (this.state.shouldRedirect){
+        if (this.props.user.email) {
             return <Redirect to="/Profile" />
         }
+        console.log(this.props.user)
         return (
             <form>
                  <input 

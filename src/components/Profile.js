@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DisplayProfileEvents from './DisplayProfileEvents'
 import Events from './Events'
+import Cloudinary from './Cloudinary'
 import { Redirect, Link } from "react-router-dom";
 import axios from 'axios'
 import { connect } from "react-redux";
@@ -36,16 +37,19 @@ class Profile extends Component {
         return (
             <div className='profilecard'>
                 <div className='usercard'>
-                Profile
-                <h1>{this.props.user.firstname} {this.props.user.lastname}</h1>
-                <h1>Works at: {this.props.user.company}</h1>
-                <h1>Favorite Sport: {this.props.user.sport}</h1>
-                <h1>City: {this.props.user.city}</h1>
-                <button id='button2' onClick={this.handleClick}>Logout</button>
+                    <div id='me'>
+                        Profile
+                        <h1>{this.props.user.firstname} {this.props.user.lastname}</h1>
+                        <h1>Works at: {this.props.user.company}</h1>
+                        <h1>Favorite Sport: {this.props.user.sport}</h1>
+                        <h1>City: {this.props.user.city}</h1>
+                        <button id='button2' onClick={this.handleClick}>Logout</button>
+                    </div>
+                    <Cloudinary />
                 </div>
-                    <Events/>
+                <Events />
                 <div>
-                    <DisplayProfileEvents/>
+                    <DisplayProfileEvents />
                 </div>
             </div>
         );

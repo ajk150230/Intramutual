@@ -27,7 +27,7 @@ module.exports={
     },
     deleteEvent: function (req, res){
         const db = req.app.get('db')
-        const event_id = req.params.id
+        const event_id = req.params.event_id
         console.log(event_id)
         db.events.deleteEvent(event_id)
             .then(response =>{
@@ -39,10 +39,23 @@ module.exports={
     },
     getEvents: function (req, res){
         const db = req.app.get('db')
+        console.log(req.session.currentUser)
         const users_id = req.session.currentUser.users_id
         db.events.getEvents(users_id)
             .then((event) => {
                 res.status(200).send(event)
+            })
+            .catch(error=>{
+                console.error(error)
+                res.sendStatus(500)
+            })
+    },
+    getAllEvents: function (req, res){
+        const db = req.app.get('db')
+        const users_id = req.session.currentUser.users_id
+        db.events.getAllEvents(users_id)
+            .then((respond) => {
+                res.status(200).send(respond)
             })
             .catch(error=>{
                 console.error(error)

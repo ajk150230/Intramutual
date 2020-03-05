@@ -3,7 +3,7 @@ const massive = require('massive')
 const session = require('express-session')
 const dotenv = require('dotenv')
 const {register, login, getSession, logout} = require('./controller/authController')
-const {postEvent, editEvent, deleteEvent, getEvents } = require('./controller/eventController')
+const {postEvent, editEvent, deleteEvent, getEvents, getAllEvents } = require('./controller/eventController')
 dotenv.config()
 const app = express()
 
@@ -30,7 +30,8 @@ app.get('/auth/logout', logout)
 
 app.post("/api/event", postEvent)
 app.put("/api/event/:event_id", editEvent)
-app.delete(`/api/event/:id`, deleteEvent)
+app.delete(`/api/event/:event_id`, deleteEvent)
 app.get("/api/event", getEvents)
+app.get("/api/discover", getAllEvents)
 
 app.listen(process.env.SERVER_PORT, () => console.log(`Listening on port ${process.env.SERVER_PORT} `)) 

@@ -65,7 +65,7 @@ class EditModal extends Component {
                         placeholder='End Time'
                         type='time'
                         onChange={this.handleChange} />
-                    <button id='button2' onClick={this.onSubmit}>Submit</button>
+                    <button id='button2' onClick={this.onSubmit}> Submit</button>
                     <button id='button3' onClick={this.handleClick}>Cancel</button>
                 </div>
             </div>

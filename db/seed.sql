@@ -25,5 +25,20 @@ users_id integer references users(users_id)
 )
 select event_name, TO_CHAR(dateofevent :: DATE, 'Mon dd, yyyy'), TO_CHAR(starttime :: TIME, 'HH:MI'), TO_CHAR(endtime :: TIME, 'HH:MI') from events
 
+insert into attending (event_id, users_id) values (1,11), (2,11), (3,11), (8,11), (1,10), (2,10), (3,10), (1,12), (2,12), (3,12)
 
 insert into events (users_id, event_name, address, dateofevent, starttime, endtime) values (10, 'Tennis', '500 ervay st', '2020-12-20', '6:00', '12:00'), (10, 'Dancing', '500 ervay st', '2020-08-12', '18:00', '20:00'), (10, 'Swimming', '500 ervay st', '2020-10-21', '6:00', '12:00')
+
+{
+"event_name": "1",
+"address": "1",
+"sport": "1",
+"date": "01-10-1010",
+"starttime":"15:30",
+"endtime": "18:00"
+}
+
+select a.event_id, a.event_name, a.address, a.sport, a.dateofevent, a.starttime, Count(b.event_id) as attendees
+from events a 
+full outer join attending b on a.event_id = b.event_id
+group by a.event_id, a.event_name, a.address, a.sport, a.dateofevent, a.starttime
