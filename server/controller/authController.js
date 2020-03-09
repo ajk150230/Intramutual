@@ -15,7 +15,8 @@ module.exports = {
                         lastname: currentUser.lastname,
                         company: currentUser.company,
                         sport: currentUser.sport,
-                        city: currentUser.city
+                        city: currentUser.city,
+                        profile_img: currentUser.profile_img
                     }
                     res.status(200).json(
                         req.session.currentUser
@@ -50,9 +51,19 @@ module.exports = {
             lastname: user.lastname,
             company: user.company,
             sport: user.sport,
-            city: user.city
+            city: user.city,
+            profile_img: user.profile_img
         }
         return res.status(200).json(req.session.currentUser)
+    },
+    editPicture: (req, res) => {
+        const db = req.app.get('db')
+        const users_id = req.session.currentUser.users_id
+        const {profile_img} = req.body
+        console.log(req.body)
+        db.editPicture([users_id, profile_img])
+            .then(()=>res.sendStatus(200))
+            .catch(err=>{console.log(err)})
     },
     getSession: async (req, res) => {
         if(req.session.currentUser){
@@ -63,4 +74,5 @@ module.exports = {
         req.session.destroy();
         return res.sendStatus(200)
     }
+
 }

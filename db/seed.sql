@@ -21,8 +21,29 @@ endTime Time not null
 create table attending 
 (
 event_id integer references events(event_id),
-users_id integer references users(users_id)
+users_id integer references users(users_id),
+rosters_id integer references rosters(rosters_id)
+) 
+
+create table rosters
+(rosters_id serial primary key,
+manager integer references users(users_id)
+event_id integer references events(event_id),
+sport varchar(30),
+team_name varchar(20),
+p1 integer references users(users_id),
+p2 integer references users(users_id),
+p3 integer references users(users_id),
+p4 integer references users(users_id),
+p5 integer references users(users_id),
+p6 integer references users(users_id),
+p7 integer references users(users_id),
+p8 integer references users(users_id),
+p9 integer references users(users_id),
+p10 integer references users(users_id),
+p11 integer references users(users_id)
 )
+
 select event_name, TO_CHAR(dateofevent :: DATE, 'Mon dd, yyyy'), TO_CHAR(starttime :: TIME, 'HH:MI'), TO_CHAR(endtime :: TIME, 'HH:MI') from events
 
 insert into attending (event_id, users_id) values (1,11), (2,11), (3,11), (8,11), (1,10), (2,10), (3,10), (1,12), (2,12), (3,12)
@@ -42,3 +63,18 @@ select a.event_id, a.event_name, a.address, a.sport, a.dateofevent, a.starttime,
 from events a 
 full outer join attending b on a.event_id = b.event_id
 group by a.event_id, a.event_name, a.address, a.sport, a.dateofevent, a.starttime
+
+select a.event_id, a.users_id, Count(b.event_id) as attendees
+from events a 
+full outer join attending b 
+on a.event_id = b.event_id 
+where a.users_id != 10 and b.users_id != 10
+group by a.event_id, a.users_id
+UNION
+select a.event_id, a.users_id, Count(b.event_id) as attendees from events a 
+FULL OUTER JOIN attending b
+ON a.event_id = b.event_id
+WHERE b.event_id IS NULL
+group by a.event_id, a.users_id
+order by attendees desc
+limit 20

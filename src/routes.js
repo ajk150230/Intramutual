@@ -6,6 +6,7 @@ import Discover from "./components/Discover"
 import Landing from "./components/Landing"
 import Login from "./components/Login"
 import Events from "./components/Events"
+import Rosters from "./components/Rosters"
 import Cloudinary from "./components/Cloudinary"
 
 export default (
@@ -17,6 +18,7 @@ export default (
         <Route path="/discover" component={Discover} />
         <Route path="/landing" component={Landing} />
         <Route path="/events" component={Events} />
+        <Route path="/rosters" component={Rosters} />
         <Route path="/cloudinary" component={Cloudinary} />
     </Switch>
 )

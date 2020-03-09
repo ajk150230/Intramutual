@@ -15,6 +15,7 @@ class Register extends Component {
             company: "",
             sport: "",
             city: "",
+            imgURL: ''
         }
     }
     handleChange = e => {

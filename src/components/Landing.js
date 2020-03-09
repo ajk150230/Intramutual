@@ -15,6 +15,9 @@ class Landing extends Component {
                     <img src={torchlogo}/>
                     <Link to='/register'><button>Create an Account</button></Link>
                 </div>
+                <section className='landingpicture' id='slide1'></section>
+                <section className='landingpicture' id='slide2'></section>
+                <section className='landingpicture' id='slide3'></section>
             </section>
         );
     }

@@ -2,9 +2,9 @@ module.exports={
     postEvent: function (req, res){
         const db = req.app.get('db')        
         const users_id = req.session.currentUser.users_id
-        const {event_name, address, dateofevent, starttime, endtime} = req.body
+        const {event_name, address, sport, dateofevent, starttime, endtime} = req.body
         console.log(dateofevent)
-        db.events.postEvents([users_id, event_name, address, dateofevent, starttime, endtime])
+        db.events.postEvents([users_id, event_name, address, sport, dateofevent, starttime, endtime])
             .then(post =>{
                 res.sendStatus(200)
             })
@@ -63,3 +63,6 @@ module.exports={
             })
     }
 }
+
+
+

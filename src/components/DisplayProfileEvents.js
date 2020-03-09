@@ -45,7 +45,6 @@ class DisplayProfileEvents extends Component {
         })
         return (
             <div className='profilecard'>
-                {console.log(this.state.open)}
                 {this.state.open ? <EditModal toggle={this.togglePop} event_id={this.state.event_id}/> : ''}
                 {mapped}
             </div>

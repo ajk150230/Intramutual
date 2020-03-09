@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
+import { connect } from "react-redux";
+import { editPicture } from "../redux/userReducer"
+
 require("dotenv").config()
 
-function Cloudinary() {
+function Cloudinary(props) {
 
     const [image, setImage] = useState('')
     const [loading, setLoading] = useState(false)
@@ -22,15 +25,13 @@ function Cloudinary() {
         const file = await res.json()
         setImage(file.secure_url)
         setLoading(false)
-
     }
-    console.log(process.env)
+    function handleClick(){
+        props.editPicture(image)
+        console.log(image)
+    }
     return (
         <div>
-            <h1>Upload Image</h1>
-            <input type="file"
-            name="file"
-            onChange={uploadImage}/>
             {loading ? (
                 <h1>loading...</h1>
             ):
@@ -38,8 +39,14 @@ function Cloudinary() {
                 <img src={image} style={{width: '100px'}}/> 
             )
             }
+            <input type="file"
+            name="file"
+            onChange={uploadImage}/>
+            <button id='button2'onClick={handleClick}>Upload</button>
         </div>
     );
 }
 
-export default Cloudinary;
+const mapStateToProps = (reduxState) => ({ user: reduxState.user})
+
+export default connect(mapStateToProps, { editPicture })(Cloudinary); 

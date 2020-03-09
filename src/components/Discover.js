@@ -1,17 +1,33 @@
 import React, { Component } from 'react';
+import Teamlist from './Teamlist'
 import { connect } from "react-redux"
 import { getAllEvents } from "../redux/eventReducer"
 import { getSession } from "../redux/userReducer"
+import { joinWaitlist } from "../redux/rosterReducer"
 import { Redirect, Link } from "react-router-dom";
 
 class Discover extends Component {
-    constructor(){
+    constructor() {
         super()
+        this.state={
+            open: false,
+            event_id: 99
+        }
     }
-    componentDidMount(){
+    componentDidMount() {
         this.props.getSession()
         this.props.getAllEvents()
         console.log(this.props)
+    }
+    handleClick = (id) => {
+        this.props.getAllEvents()
+        this.setState({event_id: id})
+        this.togglePop()
+    }
+    togglePop = () => {
+        this.setState({
+            open: !this.state.open,
+        })
     }
     render() {
         if (!this.props.user.users_id) {
@@ -23,19 +39,26 @@ class Discover extends Component {
                     <h4>Event: {element.event_name}</h4>
                     <h4>Date: {element.dateofevent}</h4>
                     <h4>Location: {element.address}</h4>
-                    <h4>At: {element.starttime}</h4>
                     <h4>{element.attendees} coming</h4>
+                    <button >Create a Team</button>
+                    <button onClick={()=>this.handleClick(element.event_id)}>Join a Team</button>
                 </div>
             )
         })
         return (
-            <div className='profilecard'>
-                {mapped}
-            </div>
+            <section>
+                <div>
+                    Find your sport
+                </div>
+                <div className='profilecard'>
+                    {this.state.open ? <Teamlist toggle={this.togglePop} event_id={this.state.event_id}/>:''}
+                    {mapped}
+                </div>
+            </section>
         );
     }
 }
 
-const mapStateToProps = (reduxState) => ({ event: reduxState.event, user: reduxState.user })
+const mapStateToProps = (reduxState) => ({ event: reduxState.event, user: reduxState.user, roster: reduxState.roster })
 
-export default connect(mapStateToProps, { getAllEvents, getSession })(Discover);
+export default connect(mapStateToProps, { getAllEvents, getSession, joinWaitlist })(Discover);
