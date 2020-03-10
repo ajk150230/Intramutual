@@ -51,10 +51,10 @@ export function getAllRostersInfo(rosters_id){
     }
 }
 
-export function editRoster(rosters_id){
+export function editRoster(p1, p2, p3, p4, p5, rosters_id){
     return{
         type: editRoster,
-        payload: axios.put(`/api/roster/${rosters_id}`)
+        payload: axios.put(`/api/roster/${rosters_id}`, {p1, p2, p3, p4, p5})
     }
 }
 

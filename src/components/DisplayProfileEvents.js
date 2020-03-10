@@ -35,17 +35,15 @@ class DisplayProfileEvents extends Component {
                     <h4>At: {element.starttime}</h4>
                     <h4>Ends: {element.endtime}</h4>
                     <button onClick={() => this.handleClick(element.event_id)}>Delete</button>
-                    <div>
-                        <div >
-                            <button onClick={() => this.togglePop(element.event_id)}>Edit</button>
-                        </div>
-                    </div>
+
+                    <button onClick={() => this.togglePop(element.event_id)}>Edit</button>
+
                 </div>
             )
         })
         return (
             <div className='profilecard'>
-                {this.state.open ? <EditModal toggle={this.togglePop} event_id={this.state.event_id}/> : ''}
+                {this.state.open ? <EditModal toggle={this.togglePop} event_id={this.state.event_id} /> : ''}
                 {mapped}
             </div>
         );

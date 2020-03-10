@@ -59,7 +59,7 @@ class Discover extends Component {
         })
         return (
             <section>
-                <div>
+                <div id='banner'>
                     Find your sport
                 </div>
                 <div className='profilecard'>

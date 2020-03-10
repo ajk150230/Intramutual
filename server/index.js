@@ -2,6 +2,7 @@ const express = require('express')
 const massive = require('massive')
 const session = require('express-session')
 const dotenv = require('dotenv')
+const path = require('path')
 const {register, login, getSession, logout, editPicture} = require('./controller/authController')
 const {postEvent, editEvent, deleteEvent, getEvents, getAllEvents } = require('./controller/eventController')
 const {createRoster, editRoster, showAllRoster, attendees, joinWaitlist, getMyRosters, getAllRostersInfo} = require('./controller/rosterController')
@@ -44,4 +45,9 @@ app.get("/api/allroster/:event_id", showAllRoster)
 app.post("/api/waitlist", joinWaitlist)
 app.get("/api/waitlist", attendees)
 
+app.use(express.static(__dirname + '/../build'))
+
+app.get('*', (req,res)=>{
+    res.sendFile(path.join(__dirname + '../build/index.html'))
+})
 app.listen(process.env.SERVER_PORT, () => console.log(`Listening on port ${process.env.SERVER_PORT} `)) 

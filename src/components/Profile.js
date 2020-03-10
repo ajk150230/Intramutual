@@ -59,6 +59,7 @@ class Profile extends Component {
                 </div>
                 <Events />
                 <div>
+                    <h1>Hosted by me:</h1>
                     <DisplayProfileEvents />
                 </div>
                 {this.state.open ? <UploadPicture toggle={this.togglePop} /> : ''}

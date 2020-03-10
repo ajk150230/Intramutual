@@ -19,8 +19,9 @@ module.exports = {
         const db = req.app.get('db')
         const users_id = req.session.currentUser_id
         const { rosters_id } = req.params
-        const { p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11 } = req.body
-        db.attend.editRoster([p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, rosters_id])
+        const { p1, p2, p3, p4, p5 } = req.body
+        console.log(req.body)
+        db.attend.editRoster([p1, p2, p3, p4, p5, rosters_id])
             .then(newRoster => {
                 res.status(200).json(newRoster)
             })

@@ -19,7 +19,9 @@ class RostersModal extends Component {
         this.props.getAllRostersInfo(this.props.rosters_id)
     }
     submit = () => {
-        console.log(this.state)
+        const { p1, p2, p3, p4, p5} = this.state
+        const rosters_id = this.props.rosters_id
+        this.props.editRoster(p1, p2, p3, p4, p5, rosters_id)
     }
     render() {
         const mapped = this.props.roster.attendees.map(element => {
@@ -36,71 +38,71 @@ class RostersModal extends Component {
                     Players available:
                     <select
                         onChange={e => this.setState({ p1: e.target.value })}>
+                        <option>None</option>
                         {this.props.roster.attendees.map(element => {
-                            return(
+                            return (
                                 <>
-                                    <option disabled selected hidden>--Choose a Player--</option>
-                                    <option value>None</option>
-                                    <option value={element.users_id}>
-                                        {element.firstname} {element.lastname}, {element.company}
-                                    </option>
+                                <option disabled selected hidden>--Choose a Player--</option>
+                                <option value={element.users_id}>
+                                    {element.firstname} {element.lastname}, {element.company}
+                                </option>
                                 </>
                             )
                         })}
                     </select>
                     <select
                         onChange={e => this.setState({ p2: e.target.value })}>
+                        <option>None</option>
                         {this.props.roster.attendees.map(element => {
                             return (
                                 <>
-                                    <option disabled selected hidden>--Choose a Player--</option>
-                                    <option value>None</option>
-                                    <option value={element.users_id}>
-                                        {element.firstname} {element.lastname}, {element.company}
-                                    </option>
+                                <option disabled selected hidden>--Choose a Player--</option>
+                                <option value={element.users_id}>
+                                    {element.firstname} {element.lastname}, {element.company}
+                                </option>
                                 </>
                             )
                         })}
                     </select>
                     <select
                         onChange={e => this.setState({ p3: e.target.value })}>
+                        <option>None</option>
                         {this.props.roster.attendees.map(element => {
                             return (
                                 <>
-                                    <option disabled selected hidden>--Choose a Player--</option>
-                                    <option value>None</option>
-                                    <option value={element.users_id}>
-                                        {element.firstname} {element.lastname}, {element.company}
-                                    </option>
+                                <option disabled selected hidden>--Choose a Player--</option>
+                                <option value={element.users_id}>
+                                    {element.firstname} {element.lastname}, {element.company}
+                                </option>
                                 </>
                             )
                         })}
                     </select>
                     <select
                         onChange={e => this.setState({ p4: e.target.value })}>
+                        <option>None</option>
                         {this.props.roster.attendees.map(element => {
                             return (
                                 <>
-                                    <option disabled selected hidden>--Choose a Player--</option>
-                                    <option value>None</option>
-                                    <option value={element.users_id}>
-                                        {element.firstname} {element.lastname}, {element.company}
-                                    </option>
+                                <option disabled selected hidden>--Choose a Player--</option>
+                                <option value={element.users_id}>
+                                    {element.firstname} {element.lastname}, {element.company}
+                                </option>
                                 </>
                             )
                         })}
                     </select>
                     <select
                         onChange={e => this.setState({ p5: e.target.value })}>
+                        <option>None</option>
                         {this.props.roster.attendees.map(element => {
                             return (
                                 <>
-                                    <option disabled selected hidden>--Choose a Player--</option>
-                                    <option value>None</option>
-                                    <option value={element.users_id}>
-                                        {element.firstname} {element.lastname}, {element.company}
-                                    </option>
-                                </>                            
+                                <option disabled selected hidden>--Choose a Player--</option>
+                                <option value={element.users_id}>
+                                    {element.firstname} {element.lastname}, {element.company}
+                                </option>
+                                </>
                             )
                         })}
                     </select>
