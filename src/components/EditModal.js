@@ -45,11 +45,14 @@ class EditModal extends Component {
                         placeholder='Address'
                         onChange={this.handleChange}
                     />
-                    <input className='inputEvent'
-                        name='sport'
-                        placeholder='Sport'
-                        onChange={this.handleChange}
-                    />
+                    <select name="sport" required
+                    onChange={e => this.setState({sport: e.target.value})}>
+                        <option disabled selected hidden>--Choose Sport--</option>
+                        <option value="Basketball">Basketball</option>
+                        <option value="Football">Football</option>
+                        <option value="Soccer">Soccer</option>
+                        <option value="Other">Other</option>
+                    </select>
                     <input className='inputEvent'
                         name='dateofevent'
                         type='date'

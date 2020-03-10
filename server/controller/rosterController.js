@@ -33,8 +33,8 @@ module.exports = {
     showAllRoster: function (req, res) {
         const db = req.app.get('db')
         console.log('hit')
-        
-        const { event_id } = req.body
+        console.log(req.params)
+        const { event_id } = req.params
         db.attend.showAllRoster(event_id)
             .then(currentRoster => {
                 console.log(currentRoster)
@@ -45,13 +45,13 @@ module.exports = {
             })
     },
     //8 get
-    getOneRoster: function (req, res) {
+    getMyRosters: function (req, res) {
         const db = req.app.get('db')
-        const {rosters_id} = req.body
-        console.log(rosters_id)
-        db.attend.getRoster(rosters_id)
-            .then(oneroster => {
-                res.status(200).json(oneroster)
+        const manager = req.session.currentUser.users_id
+        console.log(manager)
+        db.attend.getMyRosters(manager)
+            .then(allmyroster => {
+                res.status(200).json(allmyroster)
             })
             .catch(error => {
                 console.error(error)
@@ -75,8 +75,8 @@ module.exports = {
     joinWaitlist: function (req, res) {
         const db = req.app.get('db')
         const users_id = req.session.currentUser.users_id
-        const { event_id } = req.body
-        db.attend.joinWaitlist(event_id, users_id)
+        const { event_id, rosters_id } = req.body
+        db.attend.joinWaitlist(event_id, users_id, rosters_id)
             .then(post =>{
                 res.status(200).json(post)
             })
@@ -85,4 +85,17 @@ module.exports = {
                 res.status(500).json('Whats the point if you cant even get in')
             })
     },
+    getAllRostersInfo: function (req, res){
+        const db = req.app.get('db')
+        const {rosters_id} = req.params 
+        console.log(req.params)
+        db.attend.getAllRostersInfo(rosters_id)
+            .then(info=>{
+                res.status(200).json(info)
+            })
+            .catch(error =>{
+                console.error(error)
+                res.sendStatus(500)
+            })
+    }
 }

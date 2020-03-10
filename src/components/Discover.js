@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Teamlist from './Teamlist'
+import TeamRoster from './TeamRoster'
 import { connect } from "react-redux"
 import { getAllEvents } from "../redux/eventReducer"
 import { getSession } from "../redux/userReducer"
@@ -11,6 +12,7 @@ class Discover extends Component {
         super()
         this.state={
             open: false,
+            open2: false,
             event_id: 99
         }
     }
@@ -24,9 +26,19 @@ class Discover extends Component {
         this.setState({event_id: id})
         this.togglePop()
     }
+    handleClick2 = (id) => {
+        this.props.getAllEvents()
+        this.setState({event_id: id})
+        this.togglePop2()
+    }
     togglePop = () => {
         this.setState({
             open: !this.state.open,
+        })
+    }
+    togglePop2 = () => {
+        this.setState({
+            open2: !this.state.open2,
         })
     }
     render() {
@@ -40,7 +52,7 @@ class Discover extends Component {
                     <h4>Date: {element.dateofevent}</h4>
                     <h4>Location: {element.address}</h4>
                     <h4>{element.attendees} coming</h4>
-                    <button >Create a Team</button>
+                    <button onClick={()=>this.handleClick2(element.event_id)}>Create a Team</button>
                     <button onClick={()=>this.handleClick(element.event_id)}>Join a Team</button>
                 </div>
             )
@@ -52,6 +64,7 @@ class Discover extends Component {
                 </div>
                 <div className='profilecard'>
                     {this.state.open ? <Teamlist toggle={this.togglePop} event_id={this.state.event_id}/>:''}
+                    {this.state.open2 ? <TeamRoster toggle2={this.togglePop2} event_id={this.state.event_id}/>:''}
                     {mapped}
                 </div>
             </section>

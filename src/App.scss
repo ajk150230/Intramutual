@@ -198,13 +198,22 @@ input{
     color: rgb(92, 92, 92);
     font-family: $main-font;    
 }
+select{
+    border: none;
+    border-bottom: 1px solid rgb(196, 196, 196);
+    background-color: $dark-grey;
+    border-radius: 3px;
+    height: 25px;
+    color: grey;
+    font-family: $main-font;  
+}
 .inputEvent{
     border: none;
     border-bottom: 1px solid rgb(221, 221, 221);
     background-color: $dark-grey;
     border-radius: 3px;
     height: 25px;
-    color: $off-white;
+    color: grey;
     font-family: $main-font;  
 }
 .profilecard{
@@ -308,6 +317,7 @@ input{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    align-items: center;
     padding: 20px;
   }
   .modal_content {

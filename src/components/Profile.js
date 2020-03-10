@@ -17,13 +17,13 @@ class Profile extends Component {
     }
     componentDidMount() {
         this.props.getSession()
-        console.log(getSession())
     }
     handleClick = () => {
         axios.get('/auth/logout')
             .then(
             () => {
                 this.props.resetState()
+                console.log(this.props.user.users_id)
             })
 
             .catch(err => { console.log(err) })
