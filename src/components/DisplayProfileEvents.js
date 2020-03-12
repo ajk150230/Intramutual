@@ -29,7 +29,7 @@ class DisplayProfileEvents extends Component {
     render() {
         const mapped = this.props.event.profileEvents.map(element => {
             return (
-                <div id='cardV2'>
+                <div id='cardV2' style={{ "background": `url(${element.img})`}}>
                     <h4>Event: {element.event_name}</h4>
                     <h4>Date: {element.dateofevent}</h4>
                     <h4>At: {element.starttime}</h4>

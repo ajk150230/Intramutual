@@ -17,6 +17,7 @@ class RostersView extends Component {
         return (
             <div className="modal-background">
                 <div className="modal">
+                    <p>Players Registered</p>
                     <p>{mapped}</p>
                     <button id='button3' onClick={this.props.toggleView}>Cancel</button>
                 </div>

@@ -58,9 +58,11 @@ class Rosters extends Component {
         })
         return (
             <div>
-                My Teams
-                {mapped}
-                {this.state.view ? <RostersView 
+                <section className='profilecard'>
+                <div id='banner'>My Teams</div>
+                    {mapped}
+                </section>
+                {this.state.view ? <RostersView
                     toggleView={this.toggleView} rosters_id={this.state.rosters_id} /> : ''}
                 {this.state.open ? <RostersModal
                     toggle={this.toggle} rosters_id={this.state.rosters_id} /> : ''}

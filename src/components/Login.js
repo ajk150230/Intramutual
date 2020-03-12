@@ -29,7 +29,8 @@ class Login extends Component {
                 <input
                     name='email'
                     onChange={this.handleChange}
-                    placeholder='Email' />
+                    placeholder='Email' 
+                    autocomplete="off"/>
                 <input
                     name='password'
                     onChange={this.handleChange}

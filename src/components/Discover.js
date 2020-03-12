@@ -47,18 +47,20 @@ class Discover extends Component {
         }
         const mapped = this.props.event.discoverEvents.map(element => {
             return (
-                <div id='cardV2'>
+                <div id='cardV2' style={{ "background": `url(${element.img})`}}>
+                    <div id='cardplate'>
                     <h4>Event: {element.event_name}</h4>
                     <h4>Date: {element.dateofevent}</h4>
                     <h4>Location: {element.address}</h4>
                     <h4>{element.attendees} coming</h4>
                     <button onClick={()=>this.handleClick2(element.event_id)}>Create a Team</button>
                     <button onClick={()=>this.handleClick(element.event_id)}>Join a Team</button>
+                    </div>
                 </div>
             )
         })
         return (
-            <section>
+            <section className='profilecard'>
                 <div id='banner'>
                     Find your sport
                 </div>
