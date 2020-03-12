@@ -41,7 +41,8 @@ p7 integer references users(users_id),
 p8 integer references users(users_id),
 p9 integer references users(users_id),
 p10 integer references users(users_id),
-p11 integer references users(users_id)
+p11 integer references users(users_id),
+img_url text
 )
 
 select event_name, TO_CHAR(dateofevent :: DATE, 'Mon dd, yyyy'), TO_CHAR(starttime :: TIME, 'HH:MI'), TO_CHAR(endtime :: TIME, 'HH:MI') from events
@@ -81,3 +82,55 @@ WHERE b.event_id IS NULL and a.users_id !=$1
 group by a.event_id, a.users_id, a.address, a.sport, a.dateofevent
 order by attendees desc
 limit 20
+
+
+-----------------------------------------------
+select distinct e.event_id, e.event_name, e.address, e.sport,
+TO_CHAR(e.dateofevent :: DATE, 'Mon dd, yyyy') as date, 
+TO_CHAR(e.starttime :: TIME, 'HH:MI:AM') as starttime,
+TO_CHAR(e.endtime :: TIME, 'HH:MI:AM') as endtime,
+count(a.users_id) as attendees
+from events e
+LEFT JOIN rosters r
+on e.event_id = r.event_id
+full outer join attending a 
+on r.event_id = a.event_id
+where r.manager != 1 OR r.manager IS NULL
+AND e.event_id NOT IN (select e.event_id
+from events e
+join attending a
+on e.event_id = a.event_id
+where e.users_id = 1)
+group by e.event_id, e.event_name, e.address, e.sport
+ORDER BY e.event_id ASC;
+
+
+
+------------------------------------------------------------
+
+select e.event_id, e.event_name, e.address, e.sport, e.users_id,
+TO_CHAR(e.dateofevent :: DATE, 'Mon dd, yyyy') as dateofevent, 
+TO_CHAR(e.starttime :: TIME, 'HH:MI:AM') as starttime,
+TO_CHAR(e.endtime :: TIME, 'HH:MI:AM') as endtime,
+count(a.users_id) as attendees
+from events e
+join attending a 
+on e.event_id = a.event_id
+full outer JOIN rosters r
+on a.rosters_id = r.rosters_id
+where a.users_id !=1 or r.manager !=1
+group by e.event_id, event_name, address, e.sport, e.users_id, dateofevent, starttime, endtime
+UNION
+select e.event_id, e.event_name, e.address, e.sport, e.users_id,
+TO_CHAR(e.dateofevent :: DATE, 'Mon dd, yyyy') as dateofevent, 
+TO_CHAR(e.starttime :: TIME, 'HH:MI:AM') as starttime,
+TO_CHAR(e.endtime :: TIME, 'HH:MI:AM') as endtime,
+count(a.users_id) as attendees
+from events e
+full outer join attending a 
+on e.event_id = a.event_id
+where a.event_id is NULL AND e.users_id != 1
+group by e.event_id, event_name, address, sport, e.users_id, dateofevent, starttime, endtime
+ORDER BY event_id desc;
+
+------------------------------------------------------------

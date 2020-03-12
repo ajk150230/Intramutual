@@ -42,28 +42,29 @@ class Profile extends Component {
         }
         console.log(this.props.user)
         return (
-            <div className='profilecard'>
-                <div className='usercard'>
-                    <div id='me'>
-                        Profile
+                <div className='profilecard'>
+                    <div className='usercard'>
+                        <div id='me'>
+                            Profile
                         <h1>{this.props.user.firstname} {this.props.user.lastname}</h1>
-                        <h1>Works at: {this.props.user.company}</h1>
-                        <h1>Favorite Sport: {this.props.user.sport}</h1>
-                        <h1>City: {this.props.user.city}</h1>
-                        <button id='button2' onClick={this.handleClick}>Logout</button>
+                            <h1>Works at: {this.props.user.company}</h1>
+                            <h1>Favorite Sport: {this.props.user.sport}</h1>
+                            <h1>City: {this.props.user.city}</h1>
+                            <button id='button2' onClick={this.handleClick}>Logout</button>
+                        </div>
+                        <div id='me2'>
+                            <section className='profilepicture' style={{ "backgroundImage": `url(${this.props.user.profile_img})` }}></section>
+                            <button id='button4' onClick={this.togglePop}>Change Photo</button>
+                        </div>
                     </div>
-                    <div id='me2'>
-                        <section className='profilepicture' style={{ "backgroundImage": `url(${this.props.user.profile_img})`}}></section>
-                        <button id='button4' onClick={this.togglePop}>Change Photo</button>
+                    <Events />
+                    <div>
+                        <div id='banner'>Hosted by me:</div>
+                        <DisplayProfileEvents />
                     </div>
+                    {this.state.open ? <UploadPicture toggle={this.togglePop} /> : ''}
                 </div>
-                <Events />
-                <div>
-                    <h1>Hosted by me:</h1>
-                    <DisplayProfileEvents />
-                </div>
-                {this.state.open ? <UploadPicture toggle={this.togglePop} /> : ''}
-            </div>
+
         );
     }
 }

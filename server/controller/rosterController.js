@@ -7,7 +7,16 @@ module.exports = {
         console.log(req.body)
         db.attend.createRoster([manager, event_id, sport, team_name])
             .then(roster => {
-                res.status(200).json(roster)
+                const {event_id, rosters_id} = roster[0]
+                console.log(event_id, manager, rosters_id)
+                db.attend.joinWaitlist([event_id, manager, rosters_id])
+                    .then(joined => {
+                        res.status(200).json(joined)
+                    })
+                    .catch(error =>{
+                        console.error(error)
+                        res.status(500).json('sike')
+                    })
             })
             .catch(error => {
                 console.error(error)
